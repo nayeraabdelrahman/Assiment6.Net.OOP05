@@ -14,12 +14,15 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
             // Public get and set.
             public DeliveryAddress Destination { get; set; }
 
-            // ==========================================
-            // PROPERTIES
-            // ==========================================
+           //4 - Static Field
+              public static int TotalShipmentsCreated = 0;
 
-            #region Properties
-            public string TrackingCode
+        // ==========================================
+        // PROPERTIES
+        // ==========================================
+
+        #region Properties
+        public string TrackingCode
             {
                 private set
                 {
