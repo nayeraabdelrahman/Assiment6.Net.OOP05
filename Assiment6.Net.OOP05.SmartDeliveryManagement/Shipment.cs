@@ -14,8 +14,8 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
             // Public get and set.
             public DeliveryAddress Destination { get; set; }
 
-           //4 - Static Field
-              public static int TotalShipmentsCreated = 0;
+            //4 - Static Field
+            public static int TotalShipmentsCreated;
 
         // ==========================================
         // PROPERTIES
@@ -91,13 +91,13 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
             // Constructor 1 -Receives:trackingCode
             // Default values:Description = "Unknown"-Weight = 1-DeliveryFee = 50-Destination = default
             public Shipment() : this("Unknown", "Unknown", 1, 50.0m, default)
-            {
+        {
 
-            }
+        }
             public Shipment(string trackingCode) : this(trackingCode, "Unknown", 1, 50.0m, default)
-            {
+        {
 
-            }
+        }
 
             // Constructor 2-
             // Receives: trackingCode-description-weight-deliveryFee-destination
@@ -109,7 +109,8 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
                 Weight = weight;
                 DeliveryFee = deliveryFee;
                 this.Destination = Destination;
-            }
+            TotalShipmentsCreated++;
+        }
 
             #endregion
 
@@ -154,7 +155,7 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
         #region 1 - Object Copying
         public Shipment CopyShipment()
         {
- 
+            TotalShipmentsCreated++;
             return (Shipment)this.MemberwiseClone();
         }
 
@@ -165,7 +166,8 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
 
            public Shipment ShallowCopy()
             {
-                return (Shipment) this.MemberwiseClone();
+            TotalShipmentsCreated++;
+            return (Shipment) this.MemberwiseClone();
             }
 
 
@@ -182,7 +184,10 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
             deepCopyShipment.Description = this.Description;
             deepCopyShipment.Weight = this.Weight;
             deepCopyShipment.DeliveryFee = this.DeliveryFee;
-            deepCopyShipment.Destination = new DeliveryAddress(this.Destination.buildingNumber, this.Destination.street, this.Destination.city);
+           if(this.Destination != null)
+            {
+                deepCopyShipment.Destination = new DeliveryAddress(this.Destination.buildingNumber, this.Destination.street, this.Destination.city);
+            }TotalShipmentsCreated++;
             return deepCopyShipment;
         }
 
@@ -192,12 +197,20 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
 
         // Initialize shipment counter
         // Display initialization message
-
+        static Shipment()
+        {
+            Console.WriteLine("Shipment System Initialized");
+            TotalShipmentsCreated = 0;
+        }
         #endregion
 
         #region 6 - Static Method
 
         // GetTotalShipmentsCreated()
+        public static int GetTotalShipmentsCreated()
+        {
+            return TotalShipmentsCreated;
+        }
 
         #endregion
         #endregion
