@@ -110,6 +110,14 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
             // Change copied address
             // Print both addresses again
             // Compare DeliveryAddress references
+            Console.WriteLine("=========================================================");
+            Shipment shallowCopyShipment = standardShipment.ShallowCopy();
+            Console.WriteLine($"Original Address: {standardShipment.Destination.GetFullAddress()}");
+            Console.WriteLine($"copied  Address: {shallowCopyShipment.Destination.GetFullAddress()}");
+            shallowCopyShipment.Destination.SetCity("Giza");
+            Console.WriteLine("---------------------------------------------------------");
+            Console.WriteLine($"Original Address after change: {standardShipment.Destination.GetFullAddress()}");
+            Console.WriteLine($"copied  Address after change: {shallowCopyShipment.Destination.GetFullAddress()}");
 
             #endregion
 
@@ -120,7 +128,16 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
             // Change copied address
             // Print both addresses again
             // Compare DeliveryAddress references
-
+            Console.WriteLine("=========================================================");
+            Shipment deepCopyShipment = expressShipment.DeepCopy();
+            Console.WriteLine($"Original Address: {expressShipment.Destination.GetFullAddress()}");
+            Console.WriteLine($"Deep Copy Address: {deepCopyShipment.Destination.GetFullAddress()}");
+            deepCopyShipment.Destination.SetCity("Giza");
+            Console.WriteLine("---------------------------------------------------------");
+            Console.WriteLine($"Original Address after change: {expressShipment.Destination.GetFullAddress()}");
+            Console.WriteLine($"Deep Copy Address after change: {deepCopyShipment.Destination.GetFullAddress()}");
+            Console.WriteLine($"Same Shipment object? {ReferenceEquals(expressShipment, deepCopyShipment)}");
+            Console.WriteLine($"Same DeliveryAddress object? {ReferenceEquals(expressShipment.Destination, deepCopyShipment.Destination)}");
             #endregion
 
             #region 5 - Static Members Demonstration

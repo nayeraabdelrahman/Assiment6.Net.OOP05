@@ -154,11 +154,49 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
  
             return (Shipment)this.MemberwiseClone();
         }
-       
+
 
         #endregion
 
+        #region 2 - Shallow Copy
 
+           public Shipment ShallowCopy()
+            {
+                return (Shipment) this.MemberwiseClone();
+            }
+
+
+        #endregion
+
+        #region 3 - Deep Copy
+
+        // DeepCopy()
+        // Independent DeliveryAddress
+        public Shipment DeepCopy()
+        {
+            Shipment deepCopyShipment = (Shipment)this.MemberwiseClone();
+           deepCopyShipment.TrackingCode = this.TrackingCode;
+            deepCopyShipment.Description = this.Description;
+            deepCopyShipment.Weight = this.Weight;
+            deepCopyShipment.DeliveryFee = this.DeliveryFee;
+            deepCopyShipment.Destination = new DeliveryAddress(this.Destination.buildingNumber, this.Destination.street, this.Destination.city);
+            return deepCopyShipment;
+        }
+
+        #endregion
+
+        #region 5 - Static Constructor
+
+        // Initialize shipment counter
+        // Display initialization message
+
+        #endregion
+
+        #region 6 - Static Method
+
+        // GetTotalShipmentsCreated()
+
+        #endregion
         #endregion
     }
 }
