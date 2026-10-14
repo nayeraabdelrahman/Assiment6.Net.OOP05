@@ -82,112 +82,115 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
             #endregion
 
             #region Part 02 - Practical
-
+            DeliveryUtilities.PrintSystemTitle("Smart Delivery Management System", '=');
             #region 1 - Create Shipments
-
             // Create StandardShipment
             // Create ExpressShipment
             // Create InternationalShipment
-            Shipment standardShipment = new StandardShipment("sh001", "Labtop", 10, 50, new DeliveryAddress(15, "Main Street", "Cairo"));
-            Shipment expressShipment = new ExpressShipment("Sh002", "Mobile", 10, 50, new DeliveryAddress(20, "Second Street", "Cairo"),100);
-            Shipment internationalShipment = new InternationalShipment("Sh003", "Tv", 10, 50, new DeliveryAddress(25, "Third Street", "Cairo"),"Egypt",500);
+            Shipment.GetTotalShipmentsCreated();
+            DeliveryUtilities.PrintSystemTitle("Creating Shipments...", '=');
+            Console.WriteLine();
+            Shipment standardShipment = new StandardShipment("SH001", "Labtop",3, 50, new DeliveryAddress(15, "Main Street", "Cairo"), "In Transit");
+            Shipment expressShipment = new ExpressShipment("SH002", "Mobile",2, 50, new DeliveryAddress(20, "Second Street", "Cairo"), "Out for Delivery.", 100);
+            Shipment internationalShipment = new InternationalShipment("SH003", "Tv", 8, 50, new DeliveryAddress(25, "Third Street", "Cairo"), "Delivered", "Egypt", 500);
+
             #endregion
-
+            // Demonstrate static constructor
+            // GetTotalShipmentsCreated()
+            Console.WriteLine();
+            Console.WriteLine($"Total Shipments Created: {Shipment.GetTotalShipmentsCreated()}");
+            Console.WriteLine();
             #region 2 - Object Reference Assignment
-
+            Console.WriteLine();
+            DeliveryUtilities.PrintSystemTitle("Object Copying",'=');
+            Console.WriteLine();
             // Assign shipment1 to shipment2
             // Demonstrate same object reference
-            Shipment temp= standardShipment.CopyShipment();
-            Console.WriteLine(Shipment.ReferenceEquals(standardShipment, temp));
+            Shipment temp = standardShipment.CopyShipment();
+            Console.WriteLine($"Original Shipment  : {standardShipment.TrackingCode}");
+            Console.WriteLine($"Copied Shipment  : {temp.TrackingCode}");
+            Console.WriteLine();
+            Console.WriteLine($"Same Object :{Shipment.ReferenceEquals(standardShipment, temp)}");
+            Console.WriteLine();
             Shipment cloneShipment = standardShipment;
-            Console.WriteLine(Shipment.ReferenceEquals(standardShipment, cloneShipment));
+            Console.WriteLine($"Original Shipment  : {standardShipment.TrackingCode}");
+            Console.WriteLine($"Assigned Shipment  : {cloneShipment.TrackingCode}");
+            Console.WriteLine();
+            Console.WriteLine($"Same Object :{Shipment.ReferenceEquals(standardShipment, cloneShipment)}");
+            Console.WriteLine();
+
             #endregion
 
             #region 3 - Shallow Copy Demonstration
-
             // Create Shallow Copy
             // Print original and copied address
             // Change copied address
             // Print both addresses again
             // Compare DeliveryAddress references
-            Console.WriteLine("=========================================================");
+            DeliveryUtilities.PrintSystemTitle("Shallow Copy", '-');
             Shipment shallowCopyShipment = standardShipment.ShallowCopy();
-            Console.WriteLine($"Original Address: {standardShipment.Destination.GetFullAddress()}");
-            Console.WriteLine($"copied  Address: {shallowCopyShipment.Destination.GetFullAddress()}");
+            Console.WriteLine($"Original Address: {standardShipment.Destination.city}");
+            Console.WriteLine($"copied  Address: {shallowCopyShipment.Destination.city}");
+            Console.WriteLine("Changing copied shipment address...");
             shallowCopyShipment.Destination.SetCity("Giza");
-            Console.WriteLine("---------------------------------------------------------");
-            Console.WriteLine($"Original Address after change: {standardShipment.Destination.GetFullAddress()}");
-            Console.WriteLine($"copied  Address after change: {shallowCopyShipment.Destination.GetFullAddress()}");
-
+            Console.WriteLine($"Original Address after change: {standardShipment.Destination.city}");
+            Console.WriteLine($"copied  Address after change: {shallowCopyShipment.Destination.city}");
+            Console.WriteLine($"Same DeliveryAddress Object :  {ReferenceEquals(standardShipment.Destination, shallowCopyShipment.Destination)}");
             #endregion
 
             #region 4 - Deep Copy Demonstration
-
             // Create Deep Copy
             // Print original and copied address
             // Change copied address
             // Print both addresses again
             // Compare DeliveryAddress references
-            Console.WriteLine("=========================================================");
+            DeliveryUtilities.PrintSystemTitle("Deep Copy", '-');
             Shipment deepCopyShipment = expressShipment.DeepCopy();
-            Console.WriteLine($"Original Address: {expressShipment.Destination.GetFullAddress()}");
-            Console.WriteLine($"Deep Copy Address: {deepCopyShipment.Destination.GetFullAddress()}");
+            Console.WriteLine($"Original Address: {expressShipment.Destination.city}");
+            Console.WriteLine($"Deep Copy Address: {deepCopyShipment.Destination.city}");
+            Console.WriteLine("Changing copied shipment address...");
             deepCopyShipment.Destination.SetCity("Giza");
-            Console.WriteLine("---------------------------------------------------------");
-            Console.WriteLine($"Original Address after change: {expressShipment.Destination.GetFullAddress()}");
-            Console.WriteLine($"Deep Copy Address after change: {deepCopyShipment.Destination.GetFullAddress()}");
-            Console.WriteLine($"Same Shipment object? {ReferenceEquals(expressShipment, deepCopyShipment)}");
-            Console.WriteLine($"Same DeliveryAddress object? {ReferenceEquals(expressShipment.Destination, deepCopyShipment.Destination)}");
+            Console.WriteLine($"Original Address after change: {expressShipment.Destination.city}");
+            Console.WriteLine($"Deep Copy Address after change: {deepCopyShipment.Destination.city}");
+            Console.WriteLine($"Same Shipment object: {ReferenceEquals(expressShipment, deepCopyShipment)}");
+            Console.WriteLine($"Same DeliveryAddress object: {ReferenceEquals(expressShipment.Destination, deepCopyShipment.Destination)}");
             #endregion
 
-            #region 5 - Static Members Demonstration
 
-            // Demonstrate static constructor
-            // GetTotalShipmentsCreated()
-
-            #endregion
-
-            #region 6 - Static Utilities Demonstration
-
-            // PrintSeparator()
-            // PrintSystemTitle()
-
-            #endregion
-
-            #region 7 - Extension Methods Demonstration
-
+            #region Extension Methods Demonstration
             // GetSummary()
+            DeliveryUtilities.PrintSystemTitle("Extension Methods", '=');
+            Console.WriteLine($"{ standardShipment.GetSummary()}");
+            Console.WriteLine($"{expressShipment.GetSummary()}");
+            Console.WriteLine($"{internationalShipment.GetSummary()}");
             // IsDelivered()
-
+            Console.WriteLine($"{standardShipment.TrackingCode} Is Delivered: {standardShipment.IsDelivered()}");
+            Console.WriteLine($"{expressShipment.TrackingCode} Is Delivered: {expressShipment.IsDelivered()}");
+            Console.WriteLine($"{internationalShipment.TrackingCode} Is Delivered: {internationalShipment.IsDelivered()}");
             #endregion
 
-            #region 8 - Tracking Status Demonstration
+            #region Tracking Status Demonstration
 
             // UpdateTrackingStatus()
             // Display tracking status
 
+
             #endregion
 
-            #region 9 - Partial Class and Partial Method
+            #region Partial Class and Partial Method
 
             // Demonstrate tracking functionality
             // Demonstrate OnTrackingStatusChanged()
 
             #endregion
 
-            #region 10 - Assignment 04 Functionality
+            #region Assignment 04 Functionality
 
-            // Keep existing shipment functionality
-            // DeliveryCenter
-            // DeliveryReport
-            // ITrackable[]
-            // IInsurable[]
 
             #endregion
 
-            #region 11 - Assignment Completed
+            #region Assignment Completed
 
-            // Final output message
 
             #endregion
 

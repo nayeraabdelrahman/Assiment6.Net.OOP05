@@ -80,11 +80,12 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
 
         //Create a constructor that initializes all inherited members and the new properties.
         public InternationalShipment(string trackingCode, string description, decimal weight, decimal deliveryFee,
-            DeliveryAddress Destination, string destinationCountry, decimal customsFee)
-            : base(trackingCode, description, weight, deliveryFee, Destination)
+            DeliveryAddress Destination, string trackingStatus, string destinationCountry, decimal customsFee)
+            : base(trackingCode, description, weight, deliveryFee, Destination, trackingStatus)
         {
             DestinationCountry = destinationCountry;
             CustomsFee = customsFee;
+            Console.WriteLine("International Shipment Created");
         }
         #endregion
         // ==========================================
@@ -104,11 +105,7 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
 
         }
 
-        public string GetTrackingStatus()
-        {
-            return $"Shipment {TrackingCode} has been Delivered.";
-
-        }
+     
         public decimal CalculateInsurance()
         {
             return EstimatedCost * 0.12m; // 12% of the estimated cost

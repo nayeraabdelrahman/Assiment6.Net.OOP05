@@ -59,10 +59,11 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
         // using constructor chaining.
         // Also initialize ExtraFee.
         public ExpressShipment(string trackingCode, string description,
-          decimal weight, decimal deliveryFee, DeliveryAddress Destination, decimal extraFee)
-          : base(trackingCode, description, weight, deliveryFee, Destination)
+          decimal weight, decimal deliveryFee, DeliveryAddress Destination, string trackingStatus, decimal extraFee)
+          : base(trackingCode, description, weight, deliveryFee, Destination, trackingStatus)
         {
             ExtraFee = extraFee;
+            Console.WriteLine("Express Shipment Created");
         }
         #endregion
 
@@ -81,11 +82,7 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
             Console.WriteLine($"Estimated Cost: {EstimatedCost} EGP");
 
         }
-        public string GetTrackingStatus()
-        {
-            return $"Shipment {TrackingCode} is Out for Delivery.";
-
-        }
+      
         public decimal CalculateInsurance()
         {
             return EstimatedCost * 0.08m; // 8% of the estimated cost

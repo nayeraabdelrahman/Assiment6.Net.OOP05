@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Assiment6.Net.OOP05.SmartDeliveryManagement
 {
-        abstract class Shipment
+        abstract partial class Shipment
         {
             string trackingCode;
             string description;
@@ -90,11 +90,11 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
 
             // Constructor 1 -Receives:trackingCode
             // Default values:Description = "Unknown"-Weight = 1-DeliveryFee = 50-Destination = default
-            public Shipment() : this("Unknown", "Unknown", 1, 50.0m, default)
+            public Shipment() : this("Unknown", "Unknown", 1, 50.0m, default, "Unknown")
         {
 
         }
-            public Shipment(string trackingCode) : this(trackingCode, "Unknown", 1, 50.0m, default)
+            public Shipment(string trackingCode) : this(trackingCode, "Unknown", 1, 50.0m, default, "Unknown")
         {
 
         }
@@ -102,13 +102,14 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
             // Constructor 2-
             // Receives: trackingCode-description-weight-deliveryFee-destination
             public Shipment(string trackingCode, string description,
-            decimal weight, decimal deliveryFee, DeliveryAddress Destination)
+            decimal weight, decimal deliveryFee, DeliveryAddress Destination, string trackingStatus)
             {
                 TrackingCode = trackingCode;
                 Description = description;
                 Weight = weight;
                 DeliveryFee = deliveryFee;
                 this.Destination = Destination;
+            TrackingStatus = trackingStatus;
             TotalShipmentsCreated++;
         }
 
@@ -148,7 +149,12 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
 
         //PrintShipment() :Each shipment type prints its own information.
         public abstract void PrintShipment();
-       
+        // Implement the partial method OnTrackingStatusChanged 
+        public partial string OnTrackingStatusChanged(string newStatus)
+        {
+            TrackingStatus = newStatus;
+            return TrackingStatus;
+        }
         // ==========================================
         //Object Copying
         // ==========================================
@@ -199,7 +205,9 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
         // Display initialization message
         static Shipment()
         {
+            Console.WriteLine();
             Console.WriteLine("Shipment System Initialized");
+            Console.WriteLine();
             TotalShipmentsCreated = 0;
         }
         #endregion

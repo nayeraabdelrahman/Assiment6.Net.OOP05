@@ -9,6 +9,7 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
         // ==========================================
         // PROPERTIES
         // ==========================================
+       
         public override decimal EstimatedCost
         {
             get
@@ -27,10 +28,13 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
         // constructor chaining.
 
         public StandardShipment(string trackingCode, string description,
-            decimal weight, decimal deliveryFee, DeliveryAddress Destination)
-            : base(trackingCode, description, weight, deliveryFee, Destination)
+            decimal weight, decimal deliveryFee, DeliveryAddress Destination, string trackingStatus)
+            : base(trackingCode, description, weight, deliveryFee, Destination, trackingStatus)
         {
+          Console.WriteLine("Standard Shipment Created");
+      
         }
+      
         #endregion
         // ==========================================
         // Methods
@@ -48,11 +52,7 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
 
         }
 
-        public string GetTrackingStatus()
-        {
-            return $"Shipment {TrackingCode} is Ready";
-
-        }
+        
         public decimal CalculateInsurance()
         {
             return EstimatedCost * 0.05m; // 5% of the estimated cost
