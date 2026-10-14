@@ -150,10 +150,9 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
         //PrintShipment() :Each shipment type prints its own information.
         public abstract void PrintShipment();
         // Implement the partial method OnTrackingStatusChanged 
-        public partial string OnTrackingStatusChanged(string newStatus)
+        partial void OnTrackingStatusChanged(string newStatus)
         {
-            TrackingStatus = newStatus;
-            return TrackingStatus;
+            Console.WriteLine($"Tracking status changed to: {newStatus}");
         }
         // ==========================================
         //Object Copying

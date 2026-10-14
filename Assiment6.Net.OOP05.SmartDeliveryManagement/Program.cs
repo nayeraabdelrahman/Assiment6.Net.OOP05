@@ -169,32 +169,46 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
             Console.WriteLine($"{internationalShipment.TrackingCode} Is Delivered: {internationalShipment.IsDelivered()}");
             #endregion
 
-            #region Tracking Status Demonstration
+            #region Tracking Status Demonstration -Partial Class and Partial Method
 
-            // UpdateTrackingStatus()
-            // Display tracking status
+
             DeliveryUtilities.PrintSystemTitle("Tracking Status", '=');
             Console.WriteLine();
-            string newStatus = internationalShipment.UpdateTrackingStatus("Out For Delivery");
-            Console.WriteLine($"Tracking status changed to: {newStatus}");
+            internationalShipment.UpdateTrackingStatus("Out For Delivery");
             Console.WriteLine();
-            #endregion
-
-            #region Partial Class and Partial Method
-
-            // Demonstrate tracking functionality
-            // Demonstrate OnTrackingStatusChanged()
-
             #endregion
 
             #region Assignment 04 Functionality
-
-
+            //==========================================
+            //Make sure all functionality from Assignment 04 still works.
+            // ==========================================
+            // Create delivery center and add the shipments to it.
+            // ==========================================
+            DeliveryCenter deliveryCenter = new DeliveryCenter();
+            deliveryCenter.CenterName = "Delivery Center";
+            DeliveryUtilities.PrintSystemTitle(deliveryCenter.CenterName, '-');
+            deliveryCenter.AddShipment(standardShipment);
+            deliveryCenter.AddShipment(expressShipment);
+            deliveryCenter.AddShipment(internationalShipment);
+            //Print all shipments.
+            deliveryCenter.PrintAllShipments();
+            DeliveryUtilities.PrintSystemTitle("Insurance Costs", '-');
+            DeliveryReport report = new DeliveryReport();
+            deliveryCenter.PrintInsuranceCosts(report);
+            // =========================================
+            // Store the shipment objects in an ITrackable[] array and print their tracking statuses.
+            // ==========================================
+            DeliveryUtilities.PrintSystemTitle("ITrackable array of shipments",'-');
+            ITrackable[] trackableShipments ={ (ITrackable)standardShipment, (ITrackable)expressShipment, (ITrackable)internationalShipment };
+            foreach (ITrackable shipment in trackableShipments)
+            {
+                report.PrintShipment(shipment);
+            }
             #endregion
 
             #region Assignment Completed
 
-
+            DeliveryUtilities.PrintSystemTitle("Assignment Completed", '=');
             #endregion
 
             #endregion
