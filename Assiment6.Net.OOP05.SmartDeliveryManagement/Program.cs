@@ -173,8 +173,11 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
 
             // UpdateTrackingStatus()
             // Display tracking status
-
-
+            DeliveryUtilities.PrintSystemTitle("Tracking Status", '=');
+            Console.WriteLine();
+            string newStatus = internationalShipment.UpdateTrackingStatus("Out For Delivery");
+            Console.WriteLine($"Tracking status changed to: {newStatus}");
+            Console.WriteLine();
             #endregion
 
             #region Partial Class and Partial Method

@@ -17,10 +17,10 @@ namespace Assiment6.Net.OOP05.SmartDeliveryManagement
         {
             return TrackingStatus;
         }
-        public void UpdateTrackingStatus( string newStatus )
+        public string UpdateTrackingStatus( string newStatus )
         {
         
-            OnTrackingStatusChanged(newStatus);
+           return OnTrackingStatusChanged(newStatus);
         }
         public partial string OnTrackingStatusChanged(string newStatus);
 
